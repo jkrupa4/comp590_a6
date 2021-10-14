@@ -11,7 +11,12 @@ public class Dining {
 			Object left = forks[x];
 			Object right = forks[(x + 1) % 5];
 			
-			philosophers[x] = new Philosopher(left, right);
+			if (x == 0) {
+				philosophers[x] = new Philosopher(right, left, x);
+			} else {
+				philosophers[x] = new Philosopher(left, right, x);
+			}
+			
 			Thread newPhil = new Thread(philosophers[x], "Philosopher " + (x + 1));
 			newPhil.start();
 		}
